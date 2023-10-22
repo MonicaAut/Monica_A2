@@ -91,9 +91,5 @@ public class Question {
      */
     public void setIsAnswered(boolean isAnswered) {
         this.isAnswered = isAnswered;
-    }
-
-    
-    
-    
+    } 
 }

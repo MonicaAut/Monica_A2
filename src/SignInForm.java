@@ -1,8 +1,11 @@
 
+import java.awt.Color;
+import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,15 +17,37 @@ import java.sql.SQLException;
  */
 public class SignInForm extends javax.swing.JFrame {
 
-    UserRepository ur = new UserRepository();
-    StartGameForm st = new StartGameForm();
-    ScoreRepository sr = new ScoreRepository();
+    UserRepository userRepository = new UserRepository();
+    StartGameForm startGameForm = new StartGameForm();
+    ScoreRepository scoreRepository = new ScoreRepository();
 
     /**
      * Creates new form SignInForm
      */
     public SignInForm() {
         initComponents();
+        
+        // Display username icon on Jlabel
+            ImageIcon usernameIcon = new ImageIcon("./resources/usernameIcon.png");
+
+            // Resize after_image to fit JLable
+            Image usernameImage = usernameIcon.getImage().getScaledInstance(jLabel_SignIn_Username.getWidth(), jLabel_SignIn_Username.getHeight(), Image.SCALE_SMOOTH);
+            jLabel_SignIn_Username.setIcon(new ImageIcon(usernameImage));
+            
+        // Display password icon on Jlabel
+            ImageIcon passwordIcon = new ImageIcon("./resources/passwordIcon.png");
+
+            // Resize after_image to fit JLable
+            Image passwordImage = passwordIcon.getImage().getScaledInstance(jLabel_SignIn_password.getWidth(), jLabel_SignIn_password.getHeight(), Image.SCALE_SMOOTH);
+            jLabel_SignIn_password.setIcon(new ImageIcon(passwordImage));  
+            
+            // Display homepage icon on Jlabel
+            ImageIcon homepageIcon = new ImageIcon("./resources/homepageIcon.png");
+
+            // Resize after_image to fit JLable
+            Image homepageImage = homepageIcon.getImage().getScaledInstance(jLabel_LogIn_BackToHomepage.getWidth(), jLabel_LogIn_BackToHomepage.getHeight(), Image.SCALE_SMOOTH);
+            jLabel_LogIn_BackToHomepage.setIcon(new ImageIcon(homepageImage));
+            
     }
 
     /**
@@ -35,31 +60,31 @@ public class SignInForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton3 = new javax.swing.JButton();
+        jFrame1 = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel_SignIn_Username = new javax.swing.JLabel();
-        jLabel_SignIn_Password = new javax.swing.JLabel();
         jTextField_LogIn_Username = new javax.swing.JTextField();
         jPasswordField_LogIn_Password = new javax.swing.JPasswordField();
         jButton_LogIn_SignIn = new javax.swing.JButton();
         jLabel_LogIn_CreateAccout = new javax.swing.JLabel();
-        jButton_LogIn_BackToFirstPage = new javax.swing.JButton();
+        jLabel_SignIn_password = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel_LogIn_BackToHomepage = new javax.swing.JLabel();
+        jLabel_SignIn_Username = new javax.swing.JLabel();
 
         jButton3.setText("Back to First Page");
 
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTextField1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
-        jTextField1.setText("LOG IN");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jLabel_SignIn_Username.setText("Username");
-
-        jLabel_SignIn_Password.setText("Password");
 
         jPasswordField_LogIn_Password.setText("jPasswordField1");
 
@@ -80,12 +105,20 @@ public class SignInForm extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel_LogIn_CreateAccoutMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel_LogIn_CreateAccoutMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel_LogIn_CreateAccoutMouseExited(evt);
+            }
         });
 
-        jButton_LogIn_BackToFirstPage.setText("Back to First Page");
-        jButton_LogIn_BackToFirstPage.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        jLabel1.setText("LOG IN");
+
+        jLabel_LogIn_BackToHomepage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton_LogIn_BackToFirstPageMouseClicked(evt);
+                jLabel_LogIn_BackToHomepageMouseClicked(evt);
             }
         });
 
@@ -93,52 +126,57 @@ public class SignInForm extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(143, 143, 143))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel_SignIn_Password)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPasswordField_LogIn_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(182, 182, 182)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                        .addComponent(jLabel_LogIn_BackToHomepage, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel_LogIn_CreateAccout, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel_SignIn_Username)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField_LogIn_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(119, 119, 119)
+                                .addComponent(jLabel_LogIn_CreateAccout, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(86, 86, 86)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel_SignIn_password, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jPasswordField_LogIn_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel_SignIn_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextField_LogIn_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton_LogIn_SignIn)
-                        .addGap(151, 151, 151))
-                    .addComponent(jButton_LogIn_BackToFirstPage, javax.swing.GroupLayout.Alignment.TRAILING)))
+                .addComponent(jButton_LogIn_SignIn)
+                .addGap(151, 151, 151))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_SignIn_Username)
-                    .addComponent(jTextField_LogIn_Username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_SignIn_Password)
-                    .addComponent(jPasswordField_LogIn_Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_LogIn_BackToHomepage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField_LogIn_Username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_SignIn_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(jPasswordField_LogIn_Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_SignIn_password, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79)
                 .addComponent(jButton_LogIn_SignIn)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel_LogIn_CreateAccout, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jButton_LogIn_BackToFirstPage))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,14 +193,6 @@ public class SignInForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jButton_LogIn_SignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LogIn_SignInActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_LogIn_SignInActionPerformed
-
     private void jLabel_LogIn_CreateAccoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_LogIn_CreateAccoutMouseClicked
         // Go to Sign Up form
         SignUpForm su = new SignUpForm();
@@ -171,6 +201,10 @@ public class SignInForm extends javax.swing.JFrame {
         su.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_jLabel_LogIn_CreateAccoutMouseClicked
+
+    private void jButton_LogIn_SignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LogIn_SignInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_LogIn_SignInActionPerformed
 
     private void jButton_LogIn_SignInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_LogIn_SignInMouseClicked
         // Get input value
@@ -182,7 +216,7 @@ public class SignInForm extends javax.swing.JFrame {
 
         if (!emptyFields) {
             // check inputUsername and inputPassword match with the database
-            boolean match = ur.checkUsernamePasswordMatch(inputUsername, inputPassword);
+            boolean match = userRepository.checkUsernamePasswordMatch(inputUsername, inputPassword);
 
             if (match) {
                 //Get all user info
@@ -190,50 +224,53 @@ public class SignInForm extends javax.swing.JFrame {
                 String lastName = "";
                 String username = "";
                 String password = "";
-                int highestScore = sr.getUserHighestScore(inputUsername);
-                ResultSet rs = ur.getUserFromUsername(inputUsername);
+                int highestScore = scoreRepository.getUserHighestScore(inputUsername);
+                ResultSet rs = userRepository.getUserFromUsername(inputUsername);
                 try {
                     if (rs.next()) {
-                        firstName = rs.getString("username");
+                        firstName = rs.getString("firstname");
                         lastName = rs.getString("lastname");
                         username = rs.getString("username");
-                        password = rs.getString("password");                                
+                        password = rs.getString("password");
                     }
                 } catch (SQLException e) {
                     System.out.println(e);
                 }
-                
-                // Implement method to set all field in StartGame form
-                st.innitialiseStartGameForm(firstName, lastName, username, password, highestScore);
-                // Go to StartGame form
-                st.setVisible(true);
-                st.pack();
-                st.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                this.dispose();
 
-                st.setVisible(true);
-                st.pack();
-                st.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                // Implement method to set all field in StartGame form
+                startGameForm.innitialiseStartGameForm(username);
+                // Go to StartGame form
+                startGameForm.setVisible(true);
+                startGameForm.pack();
+                startGameForm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Username and/or password are/is incorrect! Please input again",
-                        "ERROR", JOptionPane.ERROR_MESSAGE);
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             //If there is empty fields: Show message, input again
             JOptionPane.showMessageDialog(this, "You must input all fields",
-                    "ERROR", JOptionPane.ERROR_MESSAGE);
+                "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_LogIn_SignInMouseClicked
 
-    private void jButton_LogIn_BackToFirstPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_LogIn_BackToFirstPageMouseClicked
-        // Go to FirstPage form
+    private void jLabel_LogIn_BackToHomepageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_LogIn_BackToHomepageMouseClicked
+        // Go to Firstpage form
         FirstPageForm fp = new FirstPageForm();
         fp.setVisible(true);
         fp.pack();
         fp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
-    }//GEN-LAST:event_jButton_LogIn_BackToFirstPageMouseClicked
+    }//GEN-LAST:event_jLabel_LogIn_BackToHomepageMouseClicked
+
+    private void jLabel_LogIn_CreateAccoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_LogIn_CreateAccoutMouseEntered
+        jLabel_LogIn_CreateAccout.setForeground(Color.RED); // Change text color to red on mouse enter
+    }//GEN-LAST:event_jLabel_LogIn_CreateAccoutMouseEntered
+
+    private void jLabel_LogIn_CreateAccoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_LogIn_CreateAccoutMouseExited
+        jLabel_LogIn_CreateAccout.setForeground(Color.BLACK); // Restore the original text color on mouse exit
+    }//GEN-LAST:event_jLabel_LogIn_CreateAccoutMouseExited
 
     /**
      * @param args the command line arguments
@@ -272,14 +309,15 @@ public class SignInForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton_LogIn_BackToFirstPage;
     private javax.swing.JButton jButton_LogIn_SignIn;
+    private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel_LogIn_BackToHomepage;
     private javax.swing.JLabel jLabel_LogIn_CreateAccout;
-    private javax.swing.JLabel jLabel_SignIn_Password;
     private javax.swing.JLabel jLabel_SignIn_Username;
+    private javax.swing.JLabel jLabel_SignIn_password;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField_LogIn_Password;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField_LogIn_Username;
     // End of variables declaration//GEN-END:variables
 }

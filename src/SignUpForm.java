@@ -1,4 +1,7 @@
 
+import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -12,14 +15,21 @@ import javax.swing.JOptionPane;
  */
 public class SignUpForm extends javax.swing.JFrame {
 
-    UserRepository ur = new UserRepository();
-    StartGameForm st = new StartGameForm();
+    UserRepository userRepository = new UserRepository();
+    StartGameForm startGameForm = new StartGameForm();
 
     /**
      * Creates new form SignUpForm
      */
     public SignUpForm() {
         initComponents();
+        // Display homepage icon on Jlabel
+            ImageIcon homepageIcon = new ImageIcon("./resources/homepageIcon.png");
+
+            // Resize after_image to fit JLable
+            Image homepageImage = homepageIcon.getImage().getScaledInstance(jLabel_SignUp_BackToFirstPage.getWidth(), jLabel_SignUp_BackToFirstPage.getHeight(), Image.SCALE_SMOOTH);
+            jLabel_SignUp_BackToFirstPage.setIcon(new ImageIcon(homepageImage));
+            
     }
 
     /**
@@ -44,9 +54,9 @@ public class SignUpForm extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPasswordField_SignUp_Password = new javax.swing.JPasswordField();
         jPasswordField_SignUp_ConfirmPassword = new javax.swing.JPasswordField();
-        jTextField_SignUp_Login = new javax.swing.JTextField();
         jButton_CreateAccount_SignUp = new javax.swing.JButton();
-        jButton_SignUp_BackToFirstPage = new javax.swing.JButton();
+        jLabel_SignUp_BackToFirstPage = new javax.swing.JLabel();
+        jTextField_SignUp_Login = new javax.swing.JLabel();
 
         jButton2.setText("Back to First Page");
 
@@ -75,18 +85,6 @@ public class SignUpForm extends javax.swing.JFrame {
 
         jPasswordField_SignUp_ConfirmPassword.setText("jPasswordField1");
 
-        jTextField_SignUp_Login.setText("Already have one, back to log in");
-        jTextField_SignUp_Login.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField_SignUp_LoginMouseClicked(evt);
-            }
-        });
-        jTextField_SignUp_Login.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_SignUp_LoginActionPerformed(evt);
-            }
-        });
-
         jButton_CreateAccount_SignUp.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jButton_CreateAccount_SignUp.setText("SIGN UP");
         jButton_CreateAccount_SignUp.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,10 +93,22 @@ public class SignUpForm extends javax.swing.JFrame {
             }
         });
 
-        jButton_SignUp_BackToFirstPage.setText("Back to First Page");
-        jButton_SignUp_BackToFirstPage.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel_SignUp_BackToFirstPage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton_SignUp_BackToFirstPageMouseClicked(evt);
+                jLabel_SignUp_BackToFirstPageMouseClicked(evt);
+            }
+        });
+
+        jTextField_SignUp_Login.setText("Already have one, back to log in");
+        jTextField_SignUp_Login.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField_SignUp_LoginMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jTextField_SignUp_LoginMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jTextField_SignUp_LoginMouseExited(evt);
             }
         });
 
@@ -126,30 +136,31 @@ public class SignUpForm extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel_SignUp_BackToFirstPage, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel4))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addComponent(jLabel6)))
-                        .addContainerGap(94, Short.MAX_VALUE))))
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(193, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField_SignUp_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton_CreateAccount_SignUp)
-                        .addGap(134, 134, 134))
-                    .addComponent(jButton_SignUp_BackToFirstPage, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jTextField_SignUp_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_CreateAccount_SignUp))
+                .addGap(86, 86, 86))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_SignUp_BackToFirstPage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -173,9 +184,8 @@ public class SignUpForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jButton_CreateAccount_SignUp)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField_SignUp_Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton_SignUp_BackToFirstPage))
+                .addComponent(jTextField_SignUp_Login)
+                .addGap(34, 34, 34))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -200,28 +210,6 @@ public class SignUpForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_SignUp_FirstNameActionPerformed
 
-    private void jTextField_SignUp_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_SignUp_LoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_SignUp_LoginActionPerformed
-
-    private void jTextField_SignUp_LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_SignUp_LoginMouseClicked
-        // Go to Sign In form
-        SignInForm si = new SignInForm();
-        si.setVisible(true);
-        si.pack();
-        si.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jTextField_SignUp_LoginMouseClicked
-
-    private void jButton_SignUp_BackToFirstPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_SignUp_BackToFirstPageMouseClicked
-        // Go to FirstPage form
-        FirstPageForm fp = new FirstPageForm();
-        fp.setVisible(true);
-        fp.pack();
-        fp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_jButton_SignUp_BackToFirstPageMouseClicked
-
     private void jButton_CreateAccount_SignUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_CreateAccount_SignUpMouseClicked
         // Get input value
         String firstName = jTextField_SignUp_FirstName.getText();
@@ -236,7 +224,7 @@ public class SignUpForm extends javax.swing.JFrame {
 
         if (!emptyFields) {
             // Check username exist
-            boolean exist = ur.checkUsernameExist(username);
+            boolean exist = userRepository.checkUsernameExist(username);
 
             if (!exist) {
                 // check password and confrim password match 
@@ -244,13 +232,13 @@ public class SignUpForm extends javax.swing.JFrame {
 
                 if (match) {
                     // Insert this new user to database
-                    ur.insertNewUser(firstName, lastName, username, password);
+                    userRepository.insertNewUser(firstName, lastName, username, password);
                     // Implement method to set all field in StartGame form
-                    st.innitialiseStartGameForm(firstName, lastName, username, password, 0);
+                    startGameForm.innitialiseStartGameForm(username);
                     // Go to StartGame form
-                    st.setVisible(true);
-                    st.pack();
-                    st.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    startGameForm.setVisible(true);
+                    startGameForm.pack();
+                    startGameForm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Username and/or password are/is incorrect! Please input again",
@@ -267,6 +255,32 @@ public class SignUpForm extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton_CreateAccount_SignUpMouseClicked
+
+    private void jLabel_SignUp_BackToFirstPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_SignUp_BackToFirstPageMouseClicked
+        // Go to Firstpage form
+        FirstPageForm fp = new FirstPageForm();
+        fp.setVisible(true);
+        fp.pack();
+        fp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jLabel_SignUp_BackToFirstPageMouseClicked
+
+    private void jTextField_SignUp_LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_SignUp_LoginMouseClicked
+        // Go to SignIn form
+        SignInForm si = new SignInForm();
+        si.setVisible(true);
+        si.pack();
+        si.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jTextField_SignUp_LoginMouseClicked
+
+    private void jTextField_SignUp_LoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_SignUp_LoginMouseEntered
+        jTextField_SignUp_Login.setForeground(Color.RED); // Change text color to red on mouse enter
+    }//GEN-LAST:event_jTextField_SignUp_LoginMouseEntered
+
+    private void jTextField_SignUp_LoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_SignUp_LoginMouseExited
+        jTextField_SignUp_Login.setForeground(Color.BLACK); // Restore the original text color on mouse exit
+    }//GEN-LAST:event_jTextField_SignUp_LoginMouseExited
 
     /**
      * @param args the command line arguments
@@ -306,19 +320,19 @@ public class SignUpForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_CreateAccount_SignUp;
-    private javax.swing.JButton jButton_SignUp_BackToFirstPage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel_SignUp_BackToFirstPage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField_SignUp_ConfirmPassword;
     private javax.swing.JPasswordField jPasswordField_SignUp_Password;
     private javax.swing.JTextField jTextField_SignUp_FirstName;
     private javax.swing.JTextField jTextField_SignUp_LastName;
-    private javax.swing.JTextField jTextField_SignUp_Login;
+    private javax.swing.JLabel jTextField_SignUp_Login;
     private javax.swing.JTextField jTextField_SignUp_Username;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,56 +15,40 @@ import java.util.Random;
  */
 public class QuizzRepository {
 
-    Database db;
-    private int score;
-    
-    public QuizzRepository()
-    {
     Database db = new Database();
-    this.setScore(0);
-    }
     
-    /**
-     * @return the score
-     */
-    public int getScore() {
-        return score;
-    }
 
-    /**
-     * @param score the score to set
-     */
-    public void setScore(int score) {
-        this.score = score;
+    public QuizzRepository() {
+        
     }
 
     // Get all question from Questions in the database
     public HashMap<String, Question> getQuestionCollection(String category) {
-        HashMap<String, Question> qc = new HashMap<String, Question>();
+        HashMap<String, Question> questionCollection = new HashMap<String, Question>();
         db.establishConnection();
-        ResultSet rs = null;
+        ResultSet result = null;
         try {
 
             String query = "SELECT * FROM questions WHERE category = ?";
 
-            rs = db.queryDB(query, category);
+            result = db.queryDB(query, category);
 
-            while (rs.next()) {
+            while (result.next()) {
                 Question quizz = new Question();
-                quizz.setQuestionID(rs.getString("questionID"));
-                quizz.setQuestion(rs.getString("question"));
-                quizz.setCategory(rs.getString("category"));
-                quizz.setAnswer(rs.getString("answer"));
-                qc.put(quizz.getQuestionID(), quizz);
+                quizz.setQuestionID(result.getString("questionID"));
+                quizz.setQuestion(result.getString("question"));
+                quizz.setCategory(result.getString("category"));
+                quizz.setAnswer(result.getString("answer"));
+                questionCollection.put(quizz.getQuestionID(), quizz);
             }
 
-            return qc;
+            return questionCollection;
         } catch (SQLException e) {
             System.out.println("ERROR - getFoodQuestionCollection" + e.getMessage());
         }
 
         db.closeConnections();
-        return qc;
+        return questionCollection;
     }
 
     // Get a random question ID which hasn't answer from a question collection
@@ -93,21 +77,14 @@ public class QuizzRepository {
         }
         return chosenQuestionId;
     }
-    
+
     // Set the question is answered and check if the answer is true or false, update the score
-    // User get + 10 mark if answer is correct, no penalty mark
-    public boolean checkUserAnswer(String userAnswer, String questionID, HashMap<String, Question> qc)
-    {
+    public boolean checkUserAnswer(String userAnswer, String questionID, HashMap<String, Question> qc) {
         qc.get(questionID).setIsAnswered(true);
+        System.out.println("User's answer: " + userAnswer);
         String systemAnswer = qc.get(questionID).getAnswer();
-        
-        if(userAnswer.equalsIgnoreCase(systemAnswer))
-        {
-            this.setScore(this.getScore() + 10);
-                 return true;
-        }
-        
-        return false;        
+        System.out.println("System answer: " + systemAnswer);
+        return userAnswer.equalsIgnoreCase(systemAnswer);
     }
 
     public static void main(String[] args) {
@@ -116,17 +93,14 @@ public class QuizzRepository {
         HashMap<String, Question> qc = qr.getQuestionCollection("Food");
 
         System.out.println(qc.size());
-        
-        String question = qr.generateQuestion(qc);
-        
-        System.out.println(question);
-        
-        System.out.println(qr.checkUserAnswer("sfd", question, qc));
-        
-        System.out.println(qc.get(question).getIsAnswered());
-        System.out.println(qr.getScore());      
-    }
 
-    
+        String question = qr.generateQuestion(qc);
+
+        System.out.println(question);
+
+        System.out.println(qr.checkUserAnswer("sfd", question, qc));
+
+        System.out.println(qc.get(question).getIsAnswered());
+    }
 
 }
