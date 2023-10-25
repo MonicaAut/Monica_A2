@@ -15,19 +15,18 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author 64273
+ * @author Group 51 - Monica Luong - ID: 22163241
  */
 public class DynamicCategories extends JFrame implements ActionListener {
 
-    QuizzForm quizzForm = new QuizzForm();
-    String username;
-    StartGameForm startGameForm = new StartGameForm();
-    CategoryRepository categoryRepository = new CategoryRepository();
-    JLabel name;
-    String[] categories = categoryRepository.getAllCategories();
-    JButton[] categoryButtons = new JButton[categories.length];
-
-    JButton restartGame;
+    private QuizzForm quizzForm = new QuizzForm();
+    private String username;
+    private StartGameForm startGameForm = new StartGameForm();
+    private CategoryRepository categoryRepository = new CategoryRepository();
+    private JLabel name;
+    private String[] categories = categoryRepository.getAllCategories();
+    private JButton[] categoryButtons = new JButton[categories.length];
+    private JButton restartGame;
 
     public DynamicCategories() {
         //initialize all the components
@@ -40,7 +39,7 @@ public class DynamicCategories extends JFrame implements ActionListener {
 
     private void initComponents() {
         name = new JLabel("Choose a category to play");
-       // Create a custom Font object with "Segoe UI", plain style, and size 24
+        // Create a custom Font object with "Segoe UI", plain style, and size 24
         Font customFont = new Font("Segoe UI BLACK", Font.PLAIN, 24);
 
         // Apply the custom Font to the JLabel
@@ -84,18 +83,28 @@ public class DynamicCategories extends JFrame implements ActionListener {
         this.setPreferredSize(new Dimension(400, 400));
     }
 
+    // Initializes action listeners for the category buttons and the "Restart Game" button.
     private void initActionListener() {
         for (int i = 0; i < categoryButtons.length; i++) {
             this.categoryButtons[i].addActionListener(this);
         }
+
+        this.restartGame.addActionListener(this);
     }
 
+    /**
+     * Invoked when a button is clicked in the user interface. 
+     * Handles button click events for category buttons and the "Restart Game" button.
+     *
+     * @param e The ActionEvent representing the button click event.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Click events for category buttons
         for (int i = 0; i < categoryButtons.length; i++) {
             if (e.getSource() == this.categoryButtons[i]) {
                 // Set the question collection only contains food question
-                quizzForm.setCategory(categories[i]);
+                quizzForm.setQuestionsForChosenCategory(categories[i]);
                 // Generate the firstQuestion, display to the screen of quizzForm
                 quizzForm.setQuestion();
                 //Pass username to Quizz form
@@ -108,7 +117,10 @@ public class DynamicCategories extends JFrame implements ActionListener {
                 this.dispose();
             }
         }
+        
+        // Click events for Restar game button
         if (e.getSource() == this.restartGame) {
+            System.out.println("Restart");
             // Implement method to set all field in StartGame form
             startGameForm.innitialiseStartGameForm(username);
             // Go to Start Game form
@@ -119,6 +131,7 @@ public class DynamicCategories extends JFrame implements ActionListener {
         }
     }
 
+    //Set the username value
     public void setUsername(String username) {
         this.username = username;
     }

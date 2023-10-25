@@ -1,6 +1,4 @@
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -11,11 +9,11 @@ import javax.swing.JOptionPane;
  */
 /**
  *
- * @author 64273
+ * @author Group 51 - Monica Luong - ID: 22163241
  */
 public class QuizzForm extends javax.swing.JFrame {
 
-    private QuizzRepository questionRepository = new QuizzRepository();
+    private QuizzRepository quizzRepository = new QuizzRepository();
     private HashMap<String, Question> questionMap = new HashMap<>();
     private String userAnswer = "";
     private String currentQuestionID = "";
@@ -26,10 +24,10 @@ public class QuizzForm extends javax.swing.JFrame {
     private String username;
     private ScoreRepository scoreResposity = new ScoreRepository();
     private StartGameForm startGameForm = new StartGameForm();
-    private UserRepository userRepository = new UserRepository();
-
-    public void setCategory(String category) {
-        HashMap<String, Question> result = questionRepository.getQuestionCollection(category);
+    
+    // Set value for questionMap by retrieve the question collection for the chosen category from database
+    public void setQuestionsForChosenCategory(String category) {
+        HashMap<String, Question> result = quizzRepository.getQuestionCollection(category);
 
         // Check if result is null before returning
         if (result != null) {
@@ -37,8 +35,9 @@ public class QuizzForm extends javax.swing.JFrame {
         }
     }
 
+    //Set current question by randomly generate question method in QuizzRepository
     public void setQuestion() {
-        currentQuestionID = questionRepository.generateQuestion(questionMap);
+        currentQuestionID = quizzRepository.generateQuestion(questionMap);
         jTextField_Question.setText(questionMap.get(currentQuestionID).getQuestion());
     }
 
@@ -170,6 +169,7 @@ public class QuizzForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Set the username value
     public void setUsername(String username) {
         this.username = username;
     }
@@ -219,9 +219,12 @@ public class QuizzForm extends javax.swing.JFrame {
           //Count the number of answered questions
         countQuestions++;
         System.out.println("You answered " + countQuestions + " question(s)!");
+        
+        // Set the isAnswered value of the currentQuestion in the questionMap to true
+        questionMap.get(currentQuestionID).setIsAnswered(true);
        
         // Check the answer
-        isAnsweredCorrect = questionRepository.checkUserAnswer(userAnswer, currentQuestionID, questionMap);
+        isAnsweredCorrect = quizzRepository.checkUserAnswer(userAnswer, currentQuestionID, questionMap);
         System.out.println("Your answer is " + isAnsweredCorrect);
         // Increment score by 10
         if (isAnsweredCorrect) {
@@ -231,7 +234,7 @@ public class QuizzForm extends javax.swing.JFrame {
         //Clear the answer field
         jTextField_userAnswer.setText("");
 
-        // Generate new question
+        // Check if the user answered all questions in the round       
         if (countQuestions < ROUND_SIZE) {
             // Generate a new question
             System.out.println("Generating a new question!");
@@ -243,56 +246,19 @@ public class QuizzForm extends javax.swing.JFrame {
             // Record the score
             System.out.println("Update score database");
             scoreResposity.insertNewScore(username, currentScore);
-            // Go back to StartGameForm
+            // Go back to StartGameForm:
             // Implement method to set all field in StartGame form
             startGameForm.innitialiseStartGameForm(username);
-            // Go to StartGame form
+            // Go back to StartGame form
             startGameForm.setVisible(true);
             startGameForm.pack();
             startGameForm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.dispose();
         }  
         }
-
-
-
     }//GEN-LAST:event_jButton_nextMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuizzForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuizzForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuizzForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuizzForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new QuizzForm().setVisible(true);
-            }
-        });
-    }
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_next;
     private javax.swing.JButton jButton_quit;

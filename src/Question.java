@@ -1,6 +1,6 @@
 /**
  *
- * @author 64273
+ * @author Group 51 - Monica Luong - ID: 22163241
  */
 public class Question {
     private String questionID;
@@ -9,10 +9,10 @@ public class Question {
     private String answer;
     private boolean isAnswered;
 
-    public Question(String questionID, String question, String answer) {
+    public Question(String questionID, String question, String category, String answer) {
         this.questionID = questionID;
         this.question = question;
-        
+        this.category = category;        
         this.answer = answer;
         this.isAnswered = false;
     }
@@ -21,8 +21,6 @@ public class Question {
        this.setIsAnswered(false); 
     }
     
-    
-
     /**
      * @return the questionID
      */

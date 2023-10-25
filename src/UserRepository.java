@@ -8,14 +8,14 @@ import java.sql.SQLException;
  */
 /**
  *
- * @author 64273
+ * @author Group 51 - Monica Luong - ID: 22163241
  */
 public class UserRepository {
 
-    Database db = new Database();
+    private Database db = new Database();
 
     // Get user info from username in the database
-    public ResultSet getUserFromUsername(String username){
+    public ResultSet getUserFromUsername(String username) {
         db.establishConnection();
         ResultSet rs = null;
         try {
@@ -37,7 +37,7 @@ public class UserRepository {
     public boolean checkUsernameExist(String username) {
         boolean exist = false;
 
-        ResultSet rs; 
+        ResultSet rs;
 
         try {
             rs = this.getUserFromUsername(username);
@@ -86,15 +86,5 @@ public class UserRepository {
         } catch (SQLException ex) {
             System.out.println("ERROR - Insert User" + ex.getMessage());
         }
-
-    }
-
-    public static void main(String[] args) {
-        UserRepository ur = new UserRepository();
-
-        System.out.println(ur.checkUsernameExist("TaylorNo1"));
-        System.out.println(ur.checkUsernamePasswordMatch("TaylorNo1", "123"));
-        
-        ur.insertNewUser("Ed", "Sheran", "EdHandsome", "Ed1");
     }
 }

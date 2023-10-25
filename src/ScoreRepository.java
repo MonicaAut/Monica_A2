@@ -3,8 +3,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.sql.Date;
-import java.text.DateFormat;
 import java.util.Random;
 
 /*
@@ -13,13 +11,13 @@ import java.util.Random;
  */
 /**
  *
- * @author 64273
+ * @author Group 51 - Monica Luong - ID: 22163241
  */
 public class ScoreRepository {
 
-    Database db = new Database();
+    private Database db = new Database();
 
-    // Get user info from username in the database
+    // Get the highest score for a specific username in the database
     public int getUserHighestScore(String username) {
         int maxScore = 0;
         db.establishConnection();
@@ -27,12 +25,10 @@ public class ScoreRepository {
         try {
 
             String query = "SELECT MAX(score) AS score FROM scores WHERE username = ?";
-           
-                           
+
             rs = db.queryDB(query, username);
-            
-            if (rs.next())
-            {
+
+            if (rs.next()) {
                 maxScore = rs.getInt("score");
                 return maxScore;
             }
@@ -43,8 +39,8 @@ public class ScoreRepository {
         db.closeConnections();
         return maxScore;
     }
-    
-    // Get all scoreID from Scores in the database
+
+    // Get all scoreID from Scores table in the database
     public ArrayList<String> getScoreID() {
         ArrayList<String> list = new ArrayList<>();
         db.establishConnection();
@@ -54,12 +50,11 @@ public class ScoreRepository {
             String query = "SELECT * FROM scores WHERE score >= ?";
 
             rs = db.queryDB(query, 0);
-            
-            while (rs.next())
-            {
+
+            while (rs.next()) {
                 list.add(rs.getString("scoreID"));
             }
-            
+
             return list;
         } catch (SQLException e) {
             System.out.println("ERROR - getllScore" + e.getMessage());
@@ -69,25 +64,24 @@ public class ScoreRepository {
         return list;
     }
 
-    // Insert a new score record
+    // Insert a new score record for a username
     public void insertNewScore(String username, int score) {
         String query = "INSERT INTO Scores (scoreID, username, score, date) VALUES (?, ?, ?, CURRENT_DATE)";
 
         try {
             String scoreID = this.generateScoreID();
-           this.db.updateDB(query, scoreID, username, score);
+            this.db.updateDB(query, scoreID, username, score);
         } catch (SQLException ex) {
             System.out.println("ERROR - Insert User" + ex.getMessage());
         }
-    } 
-    
-    // Generate random ScoreID
-   public String generateScoreID()
-   {
-    // Get a list of all scoreID in database
-       ArrayList<String> scoreIDList = this.getScoreID();
+    }
+
+    // Generate ScoreID randomly
+    public String generateScoreID() {
+        // Get a list of all scoreID in database
+        ArrayList<String> scoreIDList = this.getScoreID();
         boolean exist = true;
-        
+
         //ID start with 'S'
         String id = "S";
         //ID end with 5
@@ -102,18 +96,5 @@ public class ScoreRepository {
         }
 
         return id;
-   }
-       
-       
-    public static void main(String[] args) {
-        ScoreRepository sr = new ScoreRepository();
-        
-        ArrayList <String> list = sr.getScoreID();
-        
-        System.out.println(list.size());
-        sr.insertNewScore("TaylorNo1", 60);
-        
-        System.out.println(sr.getUserHighestScore("TaylorNo1"));
     }
-  
 }

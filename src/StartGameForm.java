@@ -11,7 +11,7 @@ import javax.swing.JFrame;
  */
 /**
  *
- * @author 64273
+ * @author Group 51 - Monica Luong - ID: 22163241
  */
 public class StartGameForm extends javax.swing.JFrame {
 
@@ -33,30 +33,36 @@ public class StartGameForm extends javax.swing.JFrame {
         ImageIcon homepageIcon = new ImageIcon("./resources/homepageIcon.png");
 
         // Resize after_image to fit JLable
-        Image homepageImage = homepageIcon.getImage().getScaledInstance(jLabel_BackToFirstPage.getWidth(), jLabel_BackToFirstPage.getHeight(), Image.SCALE_SMOOTH);
-        jLabel_BackToFirstPage.setIcon(new ImageIcon(homepageImage));
+        Image homepageImage = homepageIcon.getImage().getScaledInstance(jLabel_BackToHomePage.getWidth(), jLabel_BackToHomePage.getHeight(), Image.SCALE_SMOOTH);
+        jLabel_BackToHomePage.setIcon(new ImageIcon(homepageImage));
     }
 
+    // Set the username
     public void setUsername(String username) {
         this.username = username;
     }
-    
-     public void setFirstName(String firstName) {
+
+    // Set the firstName
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-     
-      public void setLastName(String lastName) {
+
+    // Set the lastName
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-     
-      public void setPassword(String password) {
+
+     // Set the password
+    public void setPassword(String password) {
         this.password = password;
     }
-      
-       public void setHighestScore(int highestScore) {
+
+    // Set the highest Score
+    public void setHighestScore(int highestScore) {
         this.highestScore = highestScore;
     }
 
+    //Innitialise all field in the Start Game Form
     public void innitialiseStartGameForm(String username) {
         this.setUsername(username);
         //Get all user info
@@ -103,7 +109,7 @@ public class StartGameForm extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextField_StartGame_HighestScore = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel_BackToFirstPage = new javax.swing.JLabel();
+        jLabel_BackToHomePage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,9 +157,9 @@ public class StartGameForm extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel3.setText("YOUR DETAILS");
 
-        jLabel_BackToFirstPage.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel_BackToHomePage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel_BackToFirstPageMouseClicked(evt);
+                jLabel_BackToHomePageMouseClicked(evt);
             }
         });
 
@@ -164,9 +170,9 @@ public class StartGameForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel4))
@@ -175,7 +181,6 @@ public class StartGameForm extends javax.swing.JFrame {
                                     .addComponent(jTextField_StartGame_FirstName)
                                     .addComponent(jTextField_StartGame_LastName, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +196,7 @@ public class StartGameForm extends javax.swing.JFrame {
                         .addGap(102, 102, 102)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel_BackToFirstPage, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel_BackToHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -201,7 +206,7 @@ public class StartGameForm extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3))
-                    .addComponent(jLabel_BackToFirstPage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_BackToHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -261,18 +266,9 @@ public class StartGameForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_StartGame_LastNameActionPerformed
 
+    // Action when StartGame button is clicked
     private void jButton_StartGameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_StartGameMouseClicked
-        // Go to Category form
-//        System.out.println("Go to Category form");
-//        System.out.println("UserName" + username);
-//        CategoryForm ct = new CategoryForm();
-//        ct.setUsername(this.username);
-//        ct.setVisible(true);
-//        ct.pack();
-//        ct.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        this.dispose();
-
-        // Go to Dynamics form
+        // Go to Dynamics Categories form
         System.out.println("Go to DyamicCategories form");
         System.out.println("UserName" + username);
         DynamicCategories dynamicCategoriesForm = new DynamicCategories();
@@ -283,49 +279,16 @@ public class StartGameForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton_StartGameMouseClicked
 
-    private void jLabel_BackToFirstPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BackToFirstPageMouseClicked
+    // Action when mouse clicked in BackToHomePage symbol
+    private void jLabel_BackToHomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_BackToHomePageMouseClicked
         // Go to Firstpage form
-        FirstPageForm fp = new FirstPageForm();
+        HomePage fp = new HomePage();
         fp.setVisible(true);
         fp.pack();
         fp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
-    }//GEN-LAST:event_jLabel_BackToFirstPageMouseClicked
+    }//GEN-LAST:event_jLabel_BackToHomePageMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StartGameForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StartGameForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StartGameForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StartGameForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StartGameForm().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_StartGame;
@@ -335,7 +298,7 @@ public class StartGameForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel_BackToFirstPage;
+    private javax.swing.JLabel jLabel_BackToHomePage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField_password;
     private javax.swing.JTextField jTextField_StartGame_FirstName;

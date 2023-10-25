@@ -11,22 +11,21 @@ import java.util.Random;
  */
 /**
  *
- * @author 64273
+ * @author Group 51 - Monica Luong - ID: 22163241
  */
 public class QuizzRepository {
 
-    Database db = new Database();
-    
+    private Database db = new Database();
 
     public QuizzRepository() {
-        
+
     }
 
     // Get all question from Questions in the database
     public HashMap<String, Question> getQuestionCollection(String category) {
         HashMap<String, Question> questionCollection = new HashMap<String, Question>();
         db.establishConnection();
-        ResultSet result = null;
+        ResultSet result;
         try {
 
             String query = "SELECT * FROM questions WHERE category = ?";
@@ -78,29 +77,12 @@ public class QuizzRepository {
         return chosenQuestionId;
     }
 
-    // Set the question is answered and check if the answer is true or false, update the score
+    // Set the question is answered and check if the answer is true or false
     public boolean checkUserAnswer(String userAnswer, String questionID, HashMap<String, Question> qc) {
-        qc.get(questionID).setIsAnswered(true);
         System.out.println("User's answer: " + userAnswer);
         String systemAnswer = qc.get(questionID).getAnswer();
         System.out.println("System answer: " + systemAnswer);
         return userAnswer.equalsIgnoreCase(systemAnswer);
-    }
-
-    public static void main(String[] args) {
-        QuizzRepository qr = new QuizzRepository();
-
-        HashMap<String, Question> qc = qr.getQuestionCollection("Food");
-
-        System.out.println(qc.size());
-
-        String question = qr.generateQuestion(qc);
-
-        System.out.println(question);
-
-        System.out.println(qr.checkUserAnswer("sfd", question, qc));
-
-        System.out.println(qc.get(question).getIsAnswered());
     }
 
 }

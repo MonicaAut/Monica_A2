@@ -11,12 +11,12 @@ import javax.swing.JOptionPane;
  */
 /**
  *
- * @author 64273
+ * @author Group 51 - Monica Luong - ID: 22163241
  */
 public class SignUpForm extends javax.swing.JFrame {
 
-    UserRepository userRepository = new UserRepository();
-    StartGameForm startGameForm = new StartGameForm();
+    private UserRepository userRepository = new UserRepository();
+    private StartGameForm startGameForm = new StartGameForm();
 
     /**
      * Creates new form SignUpForm
@@ -24,12 +24,11 @@ public class SignUpForm extends javax.swing.JFrame {
     public SignUpForm() {
         initComponents();
         // Display homepage icon on Jlabel
-            ImageIcon homepageIcon = new ImageIcon("./resources/homepageIcon.png");
+        ImageIcon homepageIcon = new ImageIcon("./resources/homepageIcon.png");
 
-            // Resize after_image to fit JLable
-            Image homepageImage = homepageIcon.getImage().getScaledInstance(jLabel_SignUp_BackToFirstPage.getWidth(), jLabel_SignUp_BackToFirstPage.getHeight(), Image.SCALE_SMOOTH);
-            jLabel_SignUp_BackToFirstPage.setIcon(new ImageIcon(homepageImage));
-            
+        // Resize after_image to fit JLable
+        Image homepageImage = homepageIcon.getImage().getScaledInstance(jLabel_SignUp_BackToFirstPage.getWidth(), jLabel_SignUp_BackToFirstPage.getHeight(), Image.SCALE_SMOOTH);
+        jLabel_SignUp_BackToFirstPage.setIcon(new ImageIcon(homepageImage));
     }
 
     /**
@@ -241,7 +240,7 @@ public class SignUpForm extends javax.swing.JFrame {
                     startGameForm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     this.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Username and/or password are/is incorrect! Please input again",
+                    JOptionPane.showMessageDialog(this, "Password and Confirm password don't match! Please input again",
                             "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
@@ -258,7 +257,7 @@ public class SignUpForm extends javax.swing.JFrame {
 
     private void jLabel_SignUp_BackToFirstPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_SignUp_BackToFirstPageMouseClicked
         // Go to Firstpage form
-        FirstPageForm fp = new FirstPageForm();
+        HomePage fp = new HomePage();
         fp.setVisible(true);
         fp.pack();
         fp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -282,40 +281,6 @@ public class SignUpForm extends javax.swing.JFrame {
         jTextField_SignUp_Login.setForeground(Color.BLACK); // Restore the original text color on mouse exit
     }//GEN-LAST:event_jTextField_SignUp_LoginMouseExited
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SignUpForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SignUpForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SignUpForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SignUpForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SignUpForm().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

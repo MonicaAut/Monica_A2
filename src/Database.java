@@ -15,7 +15,7 @@ import java.sql.Date;
 
 /**
  *
- * @author 64273
+ * @author Group 51 - Monica Luong - ID: 22163241
  */
 public class Database {
 
@@ -23,7 +23,6 @@ public class Database {
     String url = "jdbc:derby:OriginalCountryQuizz_Ebd; create=true";
     String dbusername = "pdc";
     String dbpassword = "pdc";
-    private Statement statement;
 
     public Database() {
         this.establishConnection();
@@ -43,7 +42,7 @@ public class Database {
                 String query = "CREATE TABLE " + "Questions" + " (QuestionID VARCHAR(10), Question VARCHAR(50), Category VARCHAR (20), Answer VARCHAR(20))";
                 this.updateDB(query);
             }
-            
+
         } catch (Throwable e) {
             System.out.println("Error - Database: " + e.getMessage());
         }
@@ -74,7 +73,6 @@ public class Database {
                 } else if (arg instanceof String) {
                     ps.setString(i, (String) arg);
                 }
-               
 
                 i++;
             }
@@ -115,7 +113,31 @@ public class Database {
         }
     }
 
-    public boolean checkExistedTable(String tableName) {
+    public void establishConnection() {
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = DriverManager.getConnection(url, dbusername, dbpassword);
+                System.out.println(url + "   CONNECTED....");
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("ERROR - establishConnection: " + ex.getMessage());
+        }
+    }
+
+    public void closeConnections() {
+        if (conn != null) {
+            try {
+                conn.close();
+
+                System.out.println(url + "   CLOSED....");
+            } catch (SQLException ex) {
+                System.out.println("ERROR: closeConnections - " + ex.getMessage());
+            }
+        }
+    }
+
+    private boolean checkExistedTable(String tableName) {
         boolean flag = false;
         try {
             System.out.println("Check existing table...");
@@ -141,31 +163,4 @@ public class Database {
         return flag;
     }
 
-    public void establishConnection() {
-        try {
-            if (conn == null || conn.isClosed()) {
-                conn = DriverManager.getConnection(url, dbusername, dbpassword);
-                System.out.println(url + "   CONNECTED....");
-            }
-
-        } catch (SQLException ex) {
-            System.out.println("ERROR - establishConnection: " + ex.getMessage());
-        }
-    }
-
-    public void closeConnections() {
-        if (conn != null) {
-            try {
-                conn.close();
-
-                System.out.println(url + "   CLOSED....");
-            } catch (SQLException ex) {
-                System.out.println("ERROR: closeConnections - " + ex.getMessage());
-            }
-        }
-    }
-
-    public static void main(String args[]) throws SQLException {
-        Database db = new Database();
-    }
 }

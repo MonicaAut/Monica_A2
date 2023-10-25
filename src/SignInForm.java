@@ -13,41 +13,41 @@ import javax.swing.ImageIcon;
  */
 /**
  *
- * @author 64273
+ * @author Group 51 - Monica Luong - ID: 22163241
  */
 public class SignInForm extends javax.swing.JFrame {
 
-    UserRepository userRepository = new UserRepository();
-    StartGameForm startGameForm = new StartGameForm();
-    ScoreRepository scoreRepository = new ScoreRepository();
+    private UserRepository userRepository = new UserRepository();
+    private StartGameForm startGameForm = new StartGameForm();
+    private ScoreRepository scoreRepository = new ScoreRepository();
 
     /**
      * Creates new form SignInForm
      */
     public SignInForm() {
         initComponents();
-        
+
         // Display username icon on Jlabel
-            ImageIcon usernameIcon = new ImageIcon("./resources/usernameIcon.png");
+        ImageIcon usernameIcon = new ImageIcon("./resources/usernameIcon.png");
 
-            // Resize after_image to fit JLable
-            Image usernameImage = usernameIcon.getImage().getScaledInstance(jLabel_SignIn_Username.getWidth(), jLabel_SignIn_Username.getHeight(), Image.SCALE_SMOOTH);
-            jLabel_SignIn_Username.setIcon(new ImageIcon(usernameImage));
-            
+        // Resize after_image to fit JLable
+        Image usernameImage = usernameIcon.getImage().getScaledInstance(jLabel_SignIn_Username.getWidth(), jLabel_SignIn_Username.getHeight(), Image.SCALE_SMOOTH);
+        jLabel_SignIn_Username.setIcon(new ImageIcon(usernameImage));
+
         // Display password icon on Jlabel
-            ImageIcon passwordIcon = new ImageIcon("./resources/passwordIcon.png");
+        ImageIcon passwordIcon = new ImageIcon("./resources/passwordIcon.png");
 
-            // Resize after_image to fit JLable
-            Image passwordImage = passwordIcon.getImage().getScaledInstance(jLabel_SignIn_password.getWidth(), jLabel_SignIn_password.getHeight(), Image.SCALE_SMOOTH);
-            jLabel_SignIn_password.setIcon(new ImageIcon(passwordImage));  
-            
-            // Display homepage icon on Jlabel
-            ImageIcon homepageIcon = new ImageIcon("./resources/homepageIcon.png");
+        // Resize after_image to fit JLable
+        Image passwordImage = passwordIcon.getImage().getScaledInstance(jLabel_SignIn_password.getWidth(), jLabel_SignIn_password.getHeight(), Image.SCALE_SMOOTH);
+        jLabel_SignIn_password.setIcon(new ImageIcon(passwordImage));
 
-            // Resize after_image to fit JLable
-            Image homepageImage = homepageIcon.getImage().getScaledInstance(jLabel_LogIn_BackToHomepage.getWidth(), jLabel_LogIn_BackToHomepage.getHeight(), Image.SCALE_SMOOTH);
-            jLabel_LogIn_BackToHomepage.setIcon(new ImageIcon(homepageImage));
-            
+        // Display homepage icon on Jlabel
+        ImageIcon homepageIcon = new ImageIcon("./resources/homepageIcon.png");
+
+        // Resize after_image to fit JLable
+        Image homepageImage = homepageIcon.getImage().getScaledInstance(jLabel_LogIn_BackToHomepage.getWidth(), jLabel_LogIn_BackToHomepage.getHeight(), Image.SCALE_SMOOTH);
+        jLabel_LogIn_BackToHomepage.setIcon(new ImageIcon(homepageImage));
+
     }
 
     /**
@@ -246,18 +246,18 @@ public class SignInForm extends javax.swing.JFrame {
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Username and/or password are/is incorrect! Please input again",
-                    "ERROR", JOptionPane.ERROR_MESSAGE);
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             //If there is empty fields: Show message, input again
             JOptionPane.showMessageDialog(this, "You must input all fields",
-                "ERROR", JOptionPane.ERROR_MESSAGE);
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton_LogIn_SignInMouseClicked
 
     private void jLabel_LogIn_BackToHomepageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_LogIn_BackToHomepageMouseClicked
         // Go to Firstpage form
-        FirstPageForm fp = new FirstPageForm();
+        HomePage fp = new HomePage();
         fp.setVisible(true);
         fp.pack();
         fp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -271,41 +271,6 @@ public class SignInForm extends javax.swing.JFrame {
     private void jLabel_LogIn_CreateAccoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_LogIn_CreateAccoutMouseExited
         jLabel_LogIn_CreateAccout.setForeground(Color.BLACK); // Restore the original text color on mouse exit
     }//GEN-LAST:event_jLabel_LogIn_CreateAccoutMouseExited
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SignInForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SignInForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SignInForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SignInForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SignInForm().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
