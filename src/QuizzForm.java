@@ -183,7 +183,7 @@ public class QuizzForm extends javax.swing.JFrame {
 
     private void jButton_quitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_quitMouseClicked
         // Show message warning 
-        int choice = JOptionPane.showConfirmDialog(null, "Are you sure?", "You're quiting this round", JOptionPane.YES_NO_OPTION);
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure?", "You're quiting the game", JOptionPane.YES_NO_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
             //Set username
             startGameForm.setUsername(username);
@@ -242,7 +242,7 @@ public class QuizzForm extends javax.swing.JFrame {
         } else {
             // Pop a message, let the user know he/she completed the round
             System.out.println("No more questions to go");
-            JOptionPane.showMessageDialog(null, "Your score for this round: " + currentScore, "You've completed all questions of this round", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Your score for this round: " + currentScore, "You've completed all questions!!!", JOptionPane.PLAIN_MESSAGE);
             // Record the score
             System.out.println("Update score database");
             scoreResposity.insertNewScore(username, currentScore);

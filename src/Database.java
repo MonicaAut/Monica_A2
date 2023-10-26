@@ -8,7 +8,6 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 //import org.apache.derby.iapi.sql.PreparedStatement;
 import java.sql.PreparedStatement;
 import java.sql.Date;
@@ -50,16 +49,27 @@ public class Database {
         this.closeConnections();
     }
 
+    /**
+     * Executes a database query and returns the ResultSet.
+     *
+     * @param query The SQL query to execute.
+     * @param args An array of query parameters to bind to the query.
+     * @return A ResultSet containing the query results.
+     * @throws SQLException If a database error occurs during the query
+     * execution.
+     */
     public ResultSet queryDB(String query, Object... args) throws SQLException {
         System.out.println("queryDB - " + query);
 
         ResultSet rs = null;
 
         try {
+            // Create a PreparedStatement for the given query
             PreparedStatement ps = conn.prepareStatement(query);
 
             int i = 1;
             for (Object arg : args) {
+                // Bind query parameters based on their data type
                 if (arg instanceof Float) {
                     ps.setFloat(i, (Float) arg);
                 } else if (arg instanceof Double) {
@@ -76,22 +86,34 @@ public class Database {
 
                 i++;
             }
-
+            // Execute the query and obtain the ResultSet
             rs = ps.executeQuery();
 
         } catch (SQLException ex) {
+            // Handle any SQLException by printing the error message
             System.out.println(ex.getMessage());
         }
-
+        // Return the ResultSet, which may be null if there was an exception    
         return rs;
     }
 
+    /**
+     * Executes a database update operation, such as INSERT, UPDATE, or DELETE
+     * based on the provided query.
+     *
+     * @param query The SQL query for the update operation.
+     * @param args An array of query parameters to bind to the query.
+     * @throws SQLException If a database error occurs during the update
+     * operation.
+     */
     public void updateDB(String query, Object... args) throws SQLException {
         try {
+            // Create a PreparedStatement for the given query
             PreparedStatement ps = conn.prepareStatement(query);
 
             int i = 1;
             for (Object arg : args) {
+                // Bind query parameters based on their data type
                 if (arg instanceof Integer) {
                     ps.setInt(i, (Integer) arg);
                 } else if (arg instanceof Boolean) {
@@ -102,29 +124,42 @@ public class Database {
 
                 i++;
             }
-
+            // Execute the update query and obtain the number of changed rows
             int changedRow = ps.executeUpdate();
+            // Print a message if at least one row was changed
             if (changedRow > 0) {
                 System.out.println("A row is changed.");
             }
 
         } catch (SQLException ex) {
+            // Handle any SQLException by printing the error message
             System.out.println(ex.getMessage());
         }
     }
 
+    /**
+     * Establishes a database connection using the specified connection details.
+     *
+     */
     public void establishConnection() {
         try {
+            // Check if the connection is null or closed
             if (conn == null || conn.isClosed()) {
+                // Create a new connection using the provided URL, username, and password
                 conn = DriverManager.getConnection(url, dbusername, dbpassword);
+                // Print a message to indicate a successful connection
                 System.out.println(url + "   CONNECTED....");
             }
 
         } catch (SQLException ex) {
+            // Handle any SQLException by printing an error message
             System.out.println("ERROR - establishConnection: " + ex.getMessage());
         }
     }
 
+    /**
+     * Closes the database connection if it is open.
+     */
     public void closeConnections() {
         if (conn != null) {
             try {
@@ -137,6 +172,7 @@ public class Database {
         }
     }
 
+    // Check if a table is already existed
     private boolean checkExistedTable(String tableName) {
         boolean flag = false;
         try {
@@ -162,5 +198,4 @@ public class Database {
 
         return flag;
     }
-
 }
